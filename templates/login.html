@@ -1,0 +1,33 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+
+<h1 class="display-1">Login</h1>
+<p class="lead">Login Below. Don't have an account? <a href="/register">Register here</a></p>
+
+<form method="POST">
+{# In your own apps, you would place the field form in a
+separate file and that file would be rendered in both register and login forms
+assuming you wanted the same layout #}
+  {{ form.hidden_tag() }}
+
+  {% for field in form
+    if field.widget.input_type != 'hidden' %}
+  <p>
+    {{ field.label }}
+    {# need to use class_ inside of jinja template to set class #}
+    {{ field(class_="form-control") }}
+
+    {% for error in field.errors %}
+    {# the way this app is set up, would have to repeat below code on every form
+    ideally you just have a separate jinja html file that has this and you import it in 
+    wherever you want it #}
+    <span class="form-text text-danger">{{ error }}</span>
+    {% endfor %}
+  </p>
+  {% endfor %}
+
+  <button class="btn btn-success" type="submit">Login</button>
+
+</form>
+{% endblock %}

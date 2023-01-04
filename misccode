@@ -1,0 +1,7 @@
+    
+    <form action="/users/{{user.username}}">
+        <button class = "btn btn-outline-light"> Profile </button>
+      </form>
+
+
+      <li><a href="{{ url_for('user_page', username=current_user.username) }}">Profile</a></li>

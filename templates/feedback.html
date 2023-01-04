@@ -1,0 +1,33 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+<h1>Feedback</h1>
+
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    {% for field in form
+      if field.widget.input_type != 'hidden' %}
+    <p>
+      {{ field.label }}
+      {{ field(class_="form-control") }}
+  
+      {% for error in field.errors %}
+      <span class="form-text text-danger">{{ error }}</span>
+      {% endfor %}
+    </p>
+    {% endfor %}
+  
+    <button class="btn btn-success" type="submit">Post Feedback</button>
+
+</form>
+<!-- Note that it would be much more efficient to send a single query with a join
+to get the tweet and username, right now each time we get the username that's a separate query from getting the tweet. Would
+be more efficient to get username and tweet, join them, and list them. Check
+lessons on SQLAlchemy on how to send a single query using a join to get appropriate info -->
+
+
+
+
+{% endblock %}
